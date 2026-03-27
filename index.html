@@ -275,10 +275,11 @@ footer{background:var(--n2);padding:24px 64px;display:flex;justify-content:space
 footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spacing:.08em;}
 
 /* ── HERO LAYOUT ── */
-.hero-layout{position:relative;z-index:2;display:flex;align-items:flex-end;gap:60px;width:100%;}
-.h-content{max-width:600px;}
 .hero-pdf-side{flex-shrink:0;width:420px;}
-@media(max-width:1200px){.hero-layout{flex-direction:column;gap:40px;}.hero-pdf-side{width:100%;}}
+.hero-pdf-side .pdf-banner{flex-direction:column;align-items:flex-start;padding:32px 36px;gap:24px;}
+.hero-pdf-side .pdf-btn{width:100%;justify-content:center;}
+.hero-pdf-side .pdf-title{font-size:clamp(18px,2vw,24px);}
+@media(max-width:1200px){...}
 
 /* ── KEYFRAMES ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
