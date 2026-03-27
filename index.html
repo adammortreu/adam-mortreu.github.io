@@ -127,16 +127,7 @@ section:nth-child(even){background:var(--n2);}
 .h-glow.b{width:400px;height:500px;bottom:-10%;left:-5%;background:radial-gradient(ellipse,rgba(22,37,64,.8) 0%,transparent 70%);animation-delay:-4s;}
 @keyframes glowFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(20px,-20px) scale(1.05)}}
 
-.h-wrap{position:relative;z-index:2;display:flex;align-items:center;gap:80px;width:100%;}
-.h-content{flex:1;max-width:600px;}
-.h-pdf-card{flex-shrink:0;width:340px;border:1px solid rgba(196,154,74,.18);background:var(--n3);padding:32px 36px;opacity:0;animation:fadeUp .95s 1s var(--e1) forwards;}
-.h-pdf-card-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-.h-pdf-card-title{font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;}
-.h-pdf-card-sub{font-size:12.5px;color:var(--m1);margin-bottom:24px;line-height:1.6;}
-.h-pdf-card-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;background:var(--gold);color:var(--navy);font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;font-weight:700;width:100%;justify-content:center;transition:background .3s,transform .3s var(--e1);}
-.h-pdf-card-btn:hover{background:var(--g2);transform:translateY(-2px);}
-.h-pdf-card-btn svg{width:14px;height:14px;flex-shrink:0;}
-@media(max-width:900px){.h-pdf-card{display:none;}.h-wrap{flex-direction:column;}}
+.h-content{position:relative;z-index:2;max-width:700px;}
 .h-chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .7s .3s var(--e1) forwards;}
 .h-name{font-family:var(--serif);font-size:clamp(60px,9vw,128px);font-weight:900;line-height:.86;letter-spacing:-.025em;color:#fff;opacity:0;animation:fadeUp .95s .45s var(--e1) forwards;}
 .h-name em{color:var(--g2);font-style:italic;display:block;}
@@ -380,7 +371,6 @@ footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spac
   <div class="h-grid"></div>
   <div class="h-glow a"></div>
   <div class="h-glow b"></div>
-<div class="h-wrap">
   <div class="h-content">
     <div class="dispo-badge">
       <div class="dispo-dot"></div>
@@ -420,16 +410,6 @@ footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spac
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Télécharger le PDF
     </a>
- </div>
-  <div class="h-pdf-card">
-    <div class="h-pdf-card-lbl">Dossier de Compétences · PDF</div>
-    <div class="h-pdf-card-title">Téléchargez mon dossier complet</div>
-    <div class="h-pdf-card-sub">3 pages · Profil, réalisations, expériences, formations · Lille · Bordeaux · Paris</div>
-    <a href="VOTRE_LIEN_PDF" class="h-pdf-card-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Télécharger le PDF
-    </a>
-  </div>
   </div>
 </section>
 
