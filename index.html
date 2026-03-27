@@ -91,9 +91,9 @@ nav.solid{padding:14px 64px;background:rgba(7,14,26,.94);backdrop-filter:blur(24
 #mob.on li:nth-child(6) a{transition-delay:.4s;}
 #mob a:hover{color:var(--gold);}
 .mob-pdf{
-  display:inline-block;margin-top:32px;
-  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--navy);background:var(--gold);padding:12px 24px;text-decoration:none;
+  display:inline-block;margin-top:24px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--navy);background:var(--gold);padding:9px 18px;text-decoration:none;
   transform:translateY(20px);opacity:0;
   transition:transform .55s .48s var(--e1),opacity .55s .48s,background .3s;
 }
@@ -617,7 +617,7 @@ function animateCounter(el) {
   const target  = parseInt(el.dataset.target);
   const prefix  = el.dataset.prefix  || '';
   const suffix  = el.dataset.suffix  || '';
-  const duration = 1800;
+  const duration = 2800;
   const start    = performance.now();
   const easeOut  = t => 1 - Math.pow(1 - t, 3);
   const tick = now => {
