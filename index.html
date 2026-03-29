@@ -135,10 +135,15 @@ section:nth-child(even){background:var(--n2);}
 @keyframes glowFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(20px,-20px) scale(1.05)}}
 
 /* ── HERO LAYOUT ── */
-.hero-layout{position:relative;z-index:2;display:flex;flex-direction:row;align-items:flex-start;gap:60px;width:100%;}
-.hero-pdf-side{flex:1;max-width:440px;padding-top:80px;}
-.h-content{max-width:560px;flex-shrink:0;}
-.hero-pdf-side .pdf-banner{flex-direction:column;align-items:flex-start;padding:32px 36px;gap:20px;}
+.hero-layout{
+  position:relative;z-index:2;
+  display:flex;flex-direction:row;
+  align-items:center;justify-content:center;
+  gap:80px;width:100%;
+}
+.h-content{flex:1;max-width:580px;}
+.hero-pdf-side{flex:0 0 400px;}
+.hero-pdf-side .pdf-banner{flex-direction:column;align-items:flex-start;padding:36px 40px;gap:24px;}
 .hero-pdf-side .pdf-btn{width:100%;justify-content:center;}
 .hero-pdf-side .pdf-title{font-size:clamp(18px,2vw,24px);}
 
@@ -166,13 +171,34 @@ section:nth-child(even){background:var(--n2);}
 
 /* ── HERO BOTTOM ── */
 .h-bottom{position:absolute;bottom:40px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;opacity:0;animation:fadeIn 1s 1.5s ease forwards;}
-.h-scroll{display:flex;align-items:center;gap:14px;}
-.h-scl{width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);animation:scrollAnim 2.5s ease-in-out infinite;}
-@keyframes scrollAnim{0%,100%{opacity:1;transform:scaleX(1)}50%{opacity:.3;transform:scaleX(.5);transform-origin:left}}
-.h-stxt{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--m2);}
 .h-cta{display:flex;gap:24px;}
 .h-cta a{font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:var(--m2);text-decoration:none;transition:color .25s;}
 .h-cta a:hover{color:var(--gold);}
+
+/* ── SCROLL INDICATOR centré ── */
+.h-scroll-center{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeIn 1s 1.8s ease forwards;
+  z-index:3;
+}
+.h-scroll-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--m2);}
+.h-scroll-mouse{
+  width:22px;height:36px;border:1.5px solid rgba(196,154,74,.4);border-radius:12px;
+  display:flex;justify-content:center;padding-top:6px;
+  transition:border-color .3s;
+}
+.h-scroll-mouse:hover{border-color:var(--gold);}
+.h-scroll-dot{
+  width:3px;height:8px;border-radius:3px;background:var(--gold);
+  animation:scrollDot 2s var(--e1) infinite;
+}
+@keyframes scrollDot{
+  0%{transform:translateY(0);opacity:1;}
+  60%{transform:translateY(10px);opacity:0;}
+  61%{transform:translateY(0);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
 
 /* ── DISPO BADGE ── */
 .dispo-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;opacity:0;animation:fadeUp .7s .2s var(--e1) forwards;}
@@ -300,7 +326,7 @@ footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spac
 /* ── RESPONSIVE ── */
 @media(max-width:1200px){
   .hero-layout{flex-direction:column;gap:48px;align-items:flex-start;}
-  .hero-pdf-side{max-width:100%;width:100%;}
+  .hero-pdf-side{flex:none;width:100%;max-width:100%;}
   .hero-pdf-side .pdf-banner{flex-direction:row;align-items:center;padding:32px 36px;}
   .hero-pdf-side .pdf-btn{width:auto;}
 }
@@ -347,6 +373,7 @@ footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spac
   footer{padding:20px;}
   .h-bottom{left:20px;right:20px;}
 }
+
 </style>
 </head>
 <body>
@@ -437,11 +464,18 @@ footer span{font-family:var(--mono);font-size:10.5px;color:var(--m2);letter-spac
   </div><!-- fin hero-layout -->
 
   <div class="h-bottom">
-    <div class="h-scroll"><div class="h-scl"></div><span class="h-stxt">Scroll</span></div>
     <div class="h-cta">
       <a href="mailto:a.mortreupro@gmail.com">a.mortreupro@gmail.com</a>
       <a href="tel:0767292575">07 67 29 25 75</a>
       <a href="https://www.linkedin.com/in/adam-mortreu/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <!-- Scroll centré animé -->
+  <div class="h-scroll-center">
+    <span class="h-scroll-label">Scroll</span>
+    <div class="h-scroll-mouse">
+      <div class="h-scroll-dot"></div>
     </div>
   </div>
 </section>
