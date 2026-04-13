@@ -1,0 +1,257 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.outer {
+  background: #130920;
+  font-family: var(--font-sans);
+  padding: 1.5rem 1rem 2rem;
+}
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tab {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.15s;
+  background: #1e0f35;
+  color: #9070C0;
+  border-color: #3a2060;
+}
+.tab:hover { opacity: 0.85; }
+.tab.active-halo  { background: #3a1a60; color: #C4A8F0; border-color: #7B5CC0; }
+.tab.active-autru { background: #0a3020; color: #7FD9A8; border-color: #2D8A60; }
+.tab.active-ikea  { background: #3a2800; color: #F5C060; border-color: #9A7010; }
+.tab.active-amnes { background: #3a0a20; color: #F0A0C0; border-color: #903050; }
+
+.scene { display: none; max-width: 680px; margin: 0 auto; }
+.scene.visible { display: block; }
+
+.scene-header { text-align: center; margin-bottom: 1.25rem; }
+.scene-num { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+.s-halo  .scene-num { color: #9070C0; }
+.s-autru .scene-num { color: #3D9A70; }
+.s-ikea  .scene-num { color: #B07820; }
+.s-amnes .scene-num { color: #A03060; }
+.scene-title { font-size: 20px; font-weight: 500; color: #F5E6C8; margin-bottom: 4px; }
+.scene-sub { font-size: 12px; font-style: italic; }
+.s-halo  .scene-sub { color: #8060A8; }
+.s-autru .scene-sub { color: #2D7050; }
+.s-ikea  .scene-sub { color: #806010; }
+.s-amnes .scene-sub { color: #802040; }
+
+.stage-desc {
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  color: #6050a0;
+  margin-bottom: 1.25rem;
+  padding: 8px 1rem;
+  border-top: 0.5px solid #2a1a50;
+  border-bottom: 0.5px solid #2a1a50;
+  line-height: 1.6;
+}
+
+.rep { margin-bottom: 1rem; }
+.rep-nom {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.s-halo  .rep-nom { background: #2a1040; color: #C4A8F0; }
+.s-autru .rep-nom { background: #0a2a18; color: #7FD9A8; }
+.s-ikea  .rep-nom { background: #2a1e00; color: #F5C060; }
+.s-amnes .rep-nom { background: #2a0a18; color: #F0A0C0; }
+
+.nom-a { filter: brightness(0.75); }
+
+.rep-text {
+  font-size: 14px;
+  color: #E0D0B8;
+  line-height: 1.8;
+  padding-left: 6px;
+}
+.dida { font-size: 12px; font-style: italic; color: #6050a0; }
+
+.fin {
+  margin-top: 1.25rem;
+  padding: 12px 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.8;
+  border: 0.5px solid #2a1a50;
+  background: #0e0620;
+}
+.s-halo  .fin { color: #9878C0; border-color: #3a1a60; }
+.s-autru .fin { color: #4a9A70; border-color: #0a3020; }
+.s-ikea  .fin { color: #A07830; border-color: #3a2800; }
+.s-amnes .fin { color: #A03060; border-color: #3a0a20; }
+
+.rideau {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+  color: #D4A017;
+}
+
+.nav-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+.nav-btn {
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #1e0f35;
+  color: #9070C0;
+  border: 0.5px solid #3a2060;
+}
+.nav-btn:hover { background: #2a1a50; }
+
+.divider-scene { height: 0.5px; background: #2a1a50; margin: 1.25rem 0; }
+</style>
+
+<div class="outer">
+
+  <div class="tabs">
+    <div class="tab active-halo" onclick="show('halo', this)">Effet de Halo</div>
+    <div class="tab" onclick="show('autru', this)">Biais de l'Autruche</div>
+    <div class="tab" onclick="show('ikea', this)">Effet IKEA</div>
+    <div class="tab" onclick="show('amnes', this)">Amnésie de Source</div>
+  </div>
+
+  <div id="scene-halo" class="scene s-halo visible">
+    <div class="scene-header">
+      <div class="scene-num">Script I — Effet de Halo</div>
+      <div class="scene-title">Le Candidat Parfait</div>
+      <div class="scene-sub">Une salle d'entretien. Un sourire. Une catastrophe annoncée.</div>
+    </div>
+    <div class="stage-desc">Sophie, RH, reçoit Lucas en entretien. Lucas porte un col roulé noir. Il ressemble à quelqu'un d'intelligent.</div>
+
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text">Bonjour Lucas, parlez-moi de votre expérience en gestion de crise.</div></div>
+    <div class="rep"><div class="rep-nom">Lucas</div><div class="rep-text">J'ai géré beaucoup de situations complexes. <span class="dida">(Pause dramatique.)</span> Très complexes.</div></div>
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text">Comme quoi par exemple ?</div></div>
+    <div class="rep"><div class="rep-nom">Lucas</div><div class="rep-text">Je préfère ne pas entrer dans les détails par confidentialité. <span class="dida">(Il n'y a pas de détails.)</span></div></div>
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text dida">(Elle note : « discret, professionnel, sens des responsabilités »)</div></div>
+    <div class="rep"><div class="rep-nom">Lucas</div><div class="rep-text">J'aime aussi beaucoup la lecture. <span class="dida">(Il a lu un livre en 2019.)</span></div></div>
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text dida">(Elle note : « curieux intellectuel, culture générale solide »)</div></div>
+    <div class="rep"><div class="rep-nom">Lucas</div><div class="rep-text">Et je cours le matin. <span class="dida">(Trois fois. En février.)</span></div></div>
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text dida">(Elle note : « discipliné, résilient, leadership naturel »)</div></div>
+    <div class="rep"><div class="rep-nom">Lucas</div><div class="rep-text">Et sinon j'aime beaucoup les chiens. <span class="dida">(Silence. Il sourit.)</span></div></div>
+    <div class="rep"><div class="rep-nom">Sophie</div><div class="rep-text">On vous recontacte lundi. <span class="dida">(Elle a déjà décidé.)</span></div></div>
+
+    <div class="fin">Lucas fut embauché. Son col roulé fit illusion encore 3 semaines.<div class="rideau">— RIDEAU —</div></div>
+  </div>
+
+  <div id="scene-autru" class="scene s-autru">
+    <div class="scene-header">
+      <div class="scene-num">Script II — Biais de l'Autruche</div>
+      <div class="scene-title">Le Budget ne Ment Pas</div>
+      <div class="scene-sub">Sauf si on refuse de le lire.</div>
+    </div>
+    <div class="stage-desc">Comité de direction. Un tableau Excel est projeté. Les chiffres sont dans le rouge. Tout le monde le voit. Personne ne le dit.</div>
+
+    <div class="rep"><div class="rep-nom">Directeur</div><div class="rep-text">Alors, le budget Q3 ? <span class="dida">(Il ne regarde pas l'écran.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Contrôleur de gestion</div><div class="rep-text">Euh… il y a quelques points d'attention sur les lignes 14 à 47. <span class="dida">(C'est tout le tableau.)</span></div></div>
+    <div class="rep"><div class="rep-nom">Directeur</div><div class="rep-text">Des points d'attention, ça s'adresse. Quelqu'un a un stylo ? <span class="dida">(Il veut refermer le fichier.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">DAF</div><div class="rep-text">On est à -34% sur les objectifs. C'est… <span class="dida">(le directeur tousse très fort)</span> …un peu en dessous des prévisions.</div></div>
+    <div class="rep"><div class="rep-nom">Directeur</div><div class="rep-text">Q4 va compenser. J'en suis certain. <span class="dida">(Il l'est sans aucune raison.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Contrôleur de gestion</div><div class="rep-text">Vous avez regardé les projections Q4 ?</div></div>
+    <div class="rep"><div class="rep-nom">Directeur</div><div class="rep-text">Je les regarderai. <span class="dida">(Il ne les regardera pas.)</span> Bon, autre point à l'ordre du jour ?</div></div>
+    <div class="rep"><div class="rep-nom nom-a">Toute la salle</div><div class="rep-text dida">(Soupir collectif. Quelqu'un ferme son ordinateur. La réunion continue.)</div></div>
+
+    <div class="fin">Le rapport annuel fut sobrement intitulé « Année de transition ».<div class="rideau">— RIDEAU —</div></div>
+  </div>
+
+  <div id="scene-ikea" class="scene s-ikea">
+    <div class="scene-header">
+      <div class="scene-num">Script III — Effet IKEA</div>
+      <div class="scene-title">Mon Chef-d'œuvre</div>
+      <div class="scene-sub">Tu l'as fait toi-même, donc c'est forcément exceptionnel.</div>
+    </div>
+    <div class="stage-desc">Réunion de revue de projet. Marc présente un outil Excel qu'il a construit en 4 heures un vendredi soir. Il en est inconditionnellement fier.</div>
+
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text">Voilà l'outil. J'ai tout fait moi-même. <span class="dida">(Il laisse le silence résonner comme une ovation imaginaire.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">C'est… du Excel ?</div></div>
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text">Du Excel avancé. Il y a une formule SOMME.SI. <span class="dida">(Il dit "avancé" comme on dit "révolutionnaire".)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">La colonne B est vide.</div></div>
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text">C'est prévu pour les données futures. C'est de la conception évolutive.</div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">Le filtre ne fonctionne pas.</div></div>
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text">C'est une feature. Ça évite les erreurs de manipulation.</div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">Il existe déjà un outil RH pour ça dans notre SI.</div></div>
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text dida">(Long silence. Il regarde son Excel. Il regarde son collègue.)</div></div>
+    <div class="rep"><div class="rep-nom">Marc</div><div class="rep-text">Le mien a une mise en forme conditionnelle.</div></div>
+
+    <div class="fin">L'outil fut maintenu 18 mois. Marc refusait qu'on y touche.<div class="rideau">— RIDEAU —</div></div>
+  </div>
+
+  <div id="scene-amnes" class="scene s-amnes">
+    <div class="scene-header">
+      <div class="scene-num">Script IV — Amnésie de Source</div>
+      <div class="scene-title">J'ai Lu Quelque Part</div>
+      <div class="scene-sub">La phrase la plus dangereuse du monde de l'entreprise.</div>
+    </div>
+    <div class="stage-desc">Réunion de stratégie. Claire prend la parole. Elle a l'air très sûre d'elle. Elle ne devrait pas.</div>
+
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text">J'ai lu une étude sérieuse qui prouve que les open spaces augmentent la créativité de 60%.</div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">Quelle étude ?</div></div>
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text">Une étude… reconnue. Américaine je crois. Ou danoise. <span class="dida">(Ou un article LinkedIn.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">En fait toutes les études récentes disent l'inverse.</div></div>
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text">Oui mais j'ai aussi vu un TED Talk là-dessus. <span class="dida">(Elle a vu 40 secondes d'un TED Talk.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Directeur</div><div class="rep-text">Lequel ?</div></div>
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text">Celui d'un monsieur… chauve. Avec des lunettes. Il était très convaincant. <span class="dida">(Silence général.)</span></div></div>
+    <div class="rep"><div class="rep-nom nom-a">Collègue</div><div class="rep-text">C'est peut-être une pub IKEA ?</div></div>
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text">Non non c'était sérieux. Il y avait un graphique. <span class="dida">(Elle est maintenant entièrement convaincue.)</span> On refait les bureaux ?</div></div>
+    <div class="rep"><div class="rep-nom nom-a">Directeur</div><div class="rep-text">On vote.</div></div>
+    <div class="rep"><div class="rep-nom">Claire</div><div class="rep-text dida">(Elle vote pour. Tout le monde vote pour. Le graphique n'existait pas.)</div></div>
+
+    <div class="fin">Les bureaux furent refaits. Personne ne retrouva jamais l'étude.<div class="rideau">— RIDEAU —</div></div>
+  </div>
+
+  <div class="nav-row">
+    <div class="nav-btn" onclick="prev()">← Précédent</div>
+    <div class="nav-btn" onclick="next()">Suivant →</div>
+  </div>
+</div>
+
+<script>
+const scenes = ['halo','autru','ikea','amnes'];
+const tabLabels = ['Effet de Halo','Biais de l\'Autruche','Effet IKEA','Amnésie de Source'];
+const activeClasses = ['active-halo','active-autru','active-ikea','active-amnes'];
+let current = 0;
+const tabs = document.querySelectorAll('.tab');
+
+function show(id, el) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('visible'));
+  document.getElementById('scene-' + id).classList.add('visible');
+  tabs.forEach((t,i) => t.className = 'tab' + (scenes[i] === id ? ' ' + activeClasses[i] : ''));
+  current = scenes.indexOf(id);
+}
+
+function next() {
+  current = (current + 1) % scenes.length;
+  show(scenes[current], null);
+}
+function prev() {
+  current = (current - 1 + scenes.length) % scenes.length;
+  show(scenes[current], null);
+}
+</script>
