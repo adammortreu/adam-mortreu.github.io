@@ -304,11 +304,12 @@
   .ball { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: auto; cursor: grab; touch-action: none; will-change: transform;
     opacity: .45; box-shadow: inset -1px -2px 4px rgba(0,0,0,.1); transition: opacity .2s; }
   .ball:hover { opacity: .9; }
-  .drop-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--soft); cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+  .drop-btn { height: 40px; padding: 0 14px; gap: 8px; font: 500 13px/1 Inter, system-ui, sans-serif; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--soft); cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
   .drop-btn:hover { color: var(--accent); border-color: #c7d2fe; }
   .drop-btn[aria-pressed="true"] { color: var(--accent); background: #eff6ff; border-color: #bfdbfe; }
   .drop-btn svg { transition: transform .3s; }
-  .drop-btn[aria-pressed="true"] svg { transform: rotate(180deg); }
+  .drop-btn svg { transform: rotate(20deg); }
+  .drop-btn[aria-pressed="true"] svg { transform: rotate(-30deg); }
   .nav-right { display: flex; align-items: center; gap: 20px; }
   .ball.grab { cursor: grabbing; opacity: 1; }
   .ball.etoiles, .ball.avions { box-shadow: none; opacity: .75; border-radius: 0; }
@@ -339,6 +340,32 @@
   .win-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .win-actions .btn { flex: 1 1 160px; justify-content: center; cursor: pointer; font: inherit; font-weight: 500; }
 
+
+  /* ====== Placeurs d'aéroport (décollage des avions) ====== */
+  .marshal { position: absolute; left: 0; top: 0; width: 18px; height: 27px; opacity: 0; transition: opacity .4s; pointer-events: none; }
+  .marshal.in { opacity: .9; }
+  .marshal.out { opacity: 0; }
+  .marshal svg { display: block; overflow: visible; fill: none; stroke: #334155; stroke-width: 1.6; stroke-linecap: round; }
+  .marshal circle { fill: #334155; stroke: none; }
+  .marshal .wand { stroke: #f97316; stroke-width: 2.2; filter: drop-shadow(0 0 2px #fb923c) drop-shadow(0 0 4px rgba(251,146,60,.8)); animation: glow .5s ease-in-out infinite alternate; }
+  .marshal .arm { transform-box: view-box; }
+  .marshal .arm-l { transform-origin: 10px 11px; animation: waveL .55s ease-in-out infinite alternate; }
+  .marshal .arm-r { transform-origin: 10px 11px; animation: waveR .55s ease-in-out infinite alternate; }
+  .marshal.go .arm-l { animation: pointL .35s ease-in-out infinite alternate; }
+  .marshal.go .arm-r { animation: pointR .35s ease-in-out infinite alternate; }
+  @keyframes waveL { from { transform: rotate(25deg); } to { transform: rotate(-55deg); } }
+  @keyframes waveR { from { transform: rotate(-25deg); } to { transform: rotate(55deg); } }
+  @keyframes pointL { from { transform: rotate(-10deg); } to { transform: rotate(-80deg); } }
+  @keyframes pointR { from { transform: rotate(10deg); } to { transform: rotate(80deg); } }
+  @keyframes glow { from { opacity: .7; } to { opacity: 1; } }
+  .runway { position: absolute; left: 0; top: 0; height: 3px; opacity: 0; transition: opacity .5s; pointer-events: none;
+    background: repeating-linear-gradient(90deg, #94a3b8 0 14px, transparent 14px 26px); border-radius: 2px; }
+  .runway.in { opacity: .7; }
+  .runway i { position: absolute; top: -2px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: #fde047; box-shadow: 0 0 5px 1px rgba(250,204,21,.85); animation: chase 1.2s ease-in-out infinite; }
+  .runway i.alt { animation-delay: .6s; }
+  @keyframes chase { 0%, 100% { opacity: .2; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+
+
   /* ====== Tablette ====== */
   @media (max-width: 900px) {
     .hero { padding: 48px 24px; gap: 40px; }
@@ -355,7 +382,8 @@
     /* Menu : logo puis liens défilables sur une ligne */
     nav { padding: 12px 16px 0; gap: 8px; }
     .nav-right { display: contents; }
-    .drop-btn { order: 1; margin-left: auto; width: 36px; height: 36px; }
+    .drop-btn { order: 1; margin-left: auto; height: 36px; padding: 0 10px; font-size: 12px; }
+    .dl-long { display: none; }
     .links { order: 2; }
     .links { width: 100%; flex-wrap: nowrap; gap: 0; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 8px; width: calc(100% + 32px); }
     .links::-webkit-scrollbar { display: none; }
@@ -449,7 +477,7 @@
       <a href="#stack">/stack</a>
       <a href="#contact">/contact</a>
     </div>
-    <button class="drop-btn" id="drop" type="button" aria-pressed="false" aria-label="Faire atterrir les avions" title="Faire atterrir les avions"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></button>
+    <button class="drop-btn" id="drop" type="button" aria-pressed="false" title="Poser les avions en papier sur le bandeau"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 11.5L22 3l-6.5 18-3.8-7.2z"/><path d="M22 3L11.7 13.8"/></svg><span class="drop-label">Faire atterrir<span class="dl-long"> les avions</span></span></button>
     </div>
   </nav>
 </header>
@@ -656,10 +684,80 @@
   dropBtn.addEventListener('click', function () {
     gravity = !gravity;
     dropBtn.setAttribute('aria-pressed', gravity ? 'true' : 'false');
-    var label = gravity ? 'Faire redécoller les avions' : 'Faire atterrir les avions';
-    dropBtn.setAttribute('aria-label', label); dropBtn.title = label;
-    if (!gravity) balls.forEach(function (b) { b.vx = (Math.random() - .5) * 10; b.vy = -6 - Math.random() * 8; });
+    dropBtn.querySelector('.drop-label').innerHTML = (gravity ? 'Faire décoller' : 'Faire atterrir') + '<span class="dl-long"> les avions</span>';
+    dropBtn.title = gravity ? 'Relancer les avions en papier' : 'Poser les avions en papier sur le bandeau';
+    timers.forEach(clearTimeout); timers = [];
+    var tk = ticker.getBoundingClientRect();
+    if (tk.top > window.innerHeight - 8) window.scrollBy({ top: tk.top - window.innerHeight * 0.75, behavior: calm ? 'auto' : 'smooth' });
+    if (gravity) { clearCrew(); balls.forEach(function (b) { b.grounded = false; b.lift = 0; }); return; }
+    if (TYPE !== 'avions' || calm) {
+      balls.forEach(function (b) { b.vx = (Math.random() - .5) * 10; b.vy = -6 - Math.random() * 8; });
+      return;
+    }
+    takeOff();
   });
+
+  /* --- Décollage façon aéroport : un placeur par avion, décollage un par un --- */
+  var timers = [], crew = [];
+  var MARSH = '<svg viewBox="0 0 20 30" width="18" height="27" aria-hidden="true">' +
+    '<g class="arm arm-l"><line x1="10" y1="11" x2="4" y2="11"/><line class="wand" x1="4" y1="11" x2="1" y2="6"/></g>' +
+    '<g class="arm arm-r"><line x1="10" y1="11" x2="16" y2="11"/><line class="wand" x1="16" y1="11" x2="19" y2="6"/></g>' +
+    '<circle cx="10" cy="5" r="3"/><line x1="10" y1="8" x2="10" y2="19"/>' +
+    '<line x1="10" y1="19" x2="6" y2="28"/><line x1="10" y1="19" x2="14" y2="28"/></svg>';
+  var runway = null, liftX = 0;
+  function clearCrew() {
+    crew.forEach(function (m) { m.el.remove(); }); crew = [];
+    if (runway) { runway.el.remove(); runway = null; }
+    balls.forEach(function (b) { b.taxiTo = null; b.roll = false; });
+  }
+  function takeOff() {
+    clearCrew();
+    var order = balls.slice().sort(function (a, b) { return b.x - a.x; });   // le plus à droite part en premier
+    var gap = small ? 26 : 36;
+    var x0 = Math.max(W * 0.22, order.length * gap + (small ? 14 : 30));                 // tête de file = début de piste
+    var end = W * 0.92;
+    liftX = x0 + (end - x0) * 0.5;                                         // point de décollage
+
+    // la piste : marquage central + balises lumineuses
+    runway = { el: document.createElement('div'), x: x0 - 20, w: end - x0 + 20 };
+    runway.el.className = 'runway';
+    var n = Math.max(6, Math.round(runway.w / 26));
+    for (var k = 0; k <= n; k++) {
+      var l = document.createElement('i');
+      l.style.left = (k / n * 100) + '%';
+      if (k % 2) l.className = 'alt';                                // une lumière sur deux, en alternance
+      runway.el.appendChild(l);
+    }
+    layer.appendChild(runway.el);
+
+    // un seul placeur, juste devant la tête de file
+    var m = { el: document.createElement('div'), x: x0 + 30 };
+    m.el.className = 'marshal'; m.el.innerHTML = MARSH;
+    layer.appendChild(m.el); crew.push(m);
+    requestAnimationFrame(function () { m.el.classList.add('in'); runway.el.classList.add('in'); });
+
+    // 1) les avions roulent jusqu'à leur place dans la file
+    order.forEach(function (b, i) { b.grounded = true; b.lift = 0; b.roll = false; b.taxiTo = x0 - i * gap; });
+
+    // 2) départs un par un
+    order.forEach(function (b, i) {
+      timers.push(setTimeout(function () {
+        m.el.classList.add('go');
+        timers.push(setTimeout(function () {
+          b.taxiTo = null; b.roll = true; b.face = 1;                       // prise d'élan sur la piste
+          m.el.classList.remove('go');
+          // les suivants avancent d'une place
+          order.slice(i + 1).forEach(function (n) { if (n.taxiTo != null) n.taxiTo += gap; });
+        }, 350));
+      }, 2400 + i * 1250));
+    });
+
+    // 3) fin : le placeur et la piste s'effacent
+    timers.push(setTimeout(function () {
+      m.el.classList.add('out'); if (runway) runway.el.classList.remove('in');
+      timers.push(setTimeout(clearCrew, 700));
+    }, 2400 + order.length * 1250 + 1500));
+  }
 
   for (var i = 0; i < count; i++) {
     var r = TYPE === 'boules' ? (small ? 4 : 5) + Math.random() * (small ? 3 : 4)
@@ -736,25 +834,37 @@
     Z = zone();
     for (var i = 0; i < balls.length; i++) {
       var b = balls[i];
+      var g = gravity || b.grounded;
       if (!b.drag) {
-        if (gravity) b.vy += 0.45;
+        if (g) b.vy += 0.45;
+        // montée douce : l'avion se cabre petit à petit après la rotation
+        if (b.lift > 0) { b.vy -= 0.03 + (60 - b.lift) * 0.0025; b.vx += b.face * 0.02; b.lift--; }
+        if (b.grounded && b.roll) {
+          // accélération progressive : lente au départ, de plus en plus vive
+          b.vx = Math.min(8, Math.max(0.4, b.vx) * 1.04 + 0.03);
+          if (b.x > liftX) { b.grounded = false; b.roll = false; b.vy = -0.4; b.lift = 60; newTarget(b); }
+        } else if (b.grounded && b.taxiTo != null) {
+          var tdx = b.taxiTo - b.x;
+          b.vx = Math.max(-3.2, Math.min(3.2, tdx * 0.07));
+          if (Math.abs(tdx) < 1.5) { b.vx = 0; b.face = 1; }
+        }
         b.x += b.vx; b.y += b.vy;
         b.vx *= 0.985; b.vy *= 0.985;
         // promenade : légère attraction vers la cible, quand la boule n'a pas été lancée fort
-        if (!gravity && !calm) {
+        if (!g && !b.lift && !calm) {
           var dx = b.tx - b.x, dy = b.ty - b.y, d = Math.hypot(dx, dy);
           if (d < 40) newTarget(b);
-          else if (Math.hypot(b.vx, b.vy) < (TYPE === 'avions' ? 2.2 : 1.6)) { b.vx += dx / d * (TYPE === 'avions' ? 0.06 : 0.035); b.vy += dy / d * (TYPE === 'avions' ? 0.06 : 0.035); }
+          else if (Math.hypot(b.vx, b.vy) < (TYPE === 'avions' ? 0.9 : 1.6)) { b.vx += dx / d * (TYPE === 'avions' ? 0.018 : 0.035); b.vy += dy / d * (TYPE === 'avions' ? 0.018 : 0.035); }
         }
         if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.8; }
         if (b.x > W - b.r) { b.x = W - b.r; b.vx = -Math.abs(b.vx) * 0.8; }
         if (b.y < b.r) { b.y = b.r; b.vy = Math.abs(b.vy) * 0.8; }
-        if (gravity) {
+        if (g) {
           // le sol = le haut du bandeau qui défile
           if (b.y > Z.h - b.r) {
             b.y = Z.h - b.r;
             b.vy = Math.abs(b.vy) > 1.2 ? -Math.abs(b.vy) * 0.45 : 0;
-            b.vx *= 0.9;
+            if (!b.roll && b.taxiTo == null) b.vx *= 0.9;   // freinage au sol, sauf pendant le roulage
           }
         } else if (b.y > Z.h - b.r) { b.y = Z.h - b.r; b.vy = -Math.abs(b.vy) * 0.8; }
       }
@@ -762,6 +872,7 @@
     // collisions entre boules
     for (var a = 0; a < balls.length; a++) for (var c = a + 1; c < balls.length; c++) {
       var p = balls[a], q = balls[c];
+      if (p.grounded || q.grounded) continue;
       var dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy), min = p.r + q.r;
       if (d > 0 && d < min) {
         var nx = dx / d, ny = dy / d, overlap = (min - d) / 2;
@@ -775,6 +886,8 @@
         }
       }
     }
+    crew.forEach(function (m) { m.el.style.transform = 'translate(' + (m.x - 9) + 'px,' + (Z.top + Z.h - 27) + 'px)'; });
+    if (runway) { runway.el.style.width = runway.w + 'px'; runway.el.style.transform = 'translate(' + runway.x + 'px,' + (Z.top + Z.h - 3) + 'px)'; }
     for (var j = 0; j < balls.length; j++) {
       var o = balls[j];
       var extra = '';
@@ -787,7 +900,7 @@
         // l'avion est retourné en miroir quand il va vers la gauche (jamais la tête en bas)
         if (Math.abs(o.vx) > 0.1) o.face = o.vx > 0 ? 1 : -1;
         if (!o.face) o.face = 1;
-        var landed = gravity && !o.drag && o.y >= Z.h - o.r - 0.5 && Math.abs(o.vy) < 0.5;
+        var landed = (gravity || o.grounded) && !o.drag && o.y >= Z.h - o.r - 0.5 && Math.abs(o.vy) < 0.5;
         var alpha = null;
         if (landed) alpha = o.face > 0 ? 0 : 180;          // posé : à plat
         else if (Math.hypot(o.vx, o.vy) > 0.15) alpha = Math.atan2(o.vy, o.vx) * 180 / Math.PI;
@@ -868,7 +981,7 @@
 /* ====== Titre qui s'efface et se réécrit ======
    Modifie la liste ci-dessous pour changer les mots (15 caractères max conseillé). */
 (function () {
-  var WORDS = ['Product Manager', 'Product Builder', 'Explorateur UX', 'Automatiseur', 'Design Thinker'];
+  var WORDS = ['Product Manager', 'Innovateur', 'Product Builder', 'Explorateur UX', 'Automatiseur', 'Design Thinker'];
   var el = document.getElementById('typed');
   if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var w = 0, i = WORDS[0].length, deleting = false;
