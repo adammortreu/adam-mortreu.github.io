@@ -366,6 +366,63 @@
   @keyframes chase { 0%, 100% { opacity: .2; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
 
 
+
+  /* ====== Call to action contact ====== */
+  .cta-mail { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 14px; min-height: 64px; padding: 10px 22px 10px 12px; border: 0; border-radius: 16px; cursor: pointer;
+    background: linear-gradient(135deg, #2563eb, #3b82f6 60%, #6366f1); color: #fff; font: inherit; text-align: left;
+    box-shadow: 0 10px 30px rgba(37,99,235,.45), inset 0 1px 0 rgba(255,255,255,.25); transition: transform .25s cubic-bezier(.2,.9,.3,1.2), box-shadow .25s; animation: ctaGlow 2.8s ease-in-out infinite; }
+  .cta-mail::after { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg); animation: sheen 3.6s ease-in-out infinite; }
+  @keyframes sheen { 0%, 55% { left: -60%; } 85%, 100% { left: 130%; } }
+  @keyframes ctaGlow { 0%, 100% { box-shadow: 0 10px 30px rgba(37,99,235,.40), inset 0 1px 0 rgba(255,255,255,.25); } 50% { box-shadow: 0 12px 40px rgba(99,102,241,.6), inset 0 1px 0 rgba(255,255,255,.25); } }
+  .cta-plane { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.16); display: inline-flex; align-items: center; justify-content: center; transition: transform .35s cubic-bezier(.2,.9,.3,1.3); }
+  .cta-txt { display: flex; flex-direction: column; line-height: 1.2; }
+  .cta-txt b { font-size: 18px; font-weight: 600; }
+  .cta-txt small { font-size: 12px; opacity: .8; font-family: var(--mono); }
+  .cta-arrow { margin-left: auto; padding-left: 6px; font-size: 20px; transition: transform .25s; }
+  @media (hover: hover) {
+    .cta-mail:hover { transform: translateY(-3px) scale(1.02); }
+    .cta-mail:hover .cta-plane { transform: translate(3px, -3px) rotate(-12deg); }
+    .cta-mail:hover .cta-arrow { transform: translateX(4px); }
+  }
+  .cta-mail:focus-visible { outline: 2px solid #93c5fd; outline-offset: 4px; }
+  .cta-mail.popback { animation: popBack .6s cubic-bezier(.2,.9,.3,1.3); }
+  @keyframes popBack { 0% { transform: scale(.4); opacity: .2; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
+
+  /* ====== Boîte d'envoi ====== */
+  .mail-veil { position: fixed; inset: 0; z-index: 44; background: rgba(15,23,42,.45); opacity: 0; transition: opacity .4s ease; }
+  .mail-veil.show { opacity: 1; }
+  .mail-veil[hidden], .mailbox[hidden], .mail-plane[hidden] { display: none; }
+  .mailbox { position: fixed; z-index: 45; inset: 0; margin: auto; height: fit-content; width: min(440px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain;
+    background: linear-gradient(160deg, #2563eb, #1d4ed8 55%, #4f46e5); color: #fff; border-radius: 22px; box-shadow: 0 24px 60px rgba(15,23,42,.30); will-change: transform, opacity; transform-origin: 50% 50%; backface-visibility: hidden; }
+  .mail-inner { padding: 26px 24px 20px; }
+  .mail-kicker { font-family: var(--mono); font-size: 12px; opacity: .8; }
+  .mailbox h3 { font-family: var(--display); font-size: 24px; margin: 4px 0 16px; }
+  .mailbox label { display: block; font-size: 13px; font-weight: 500; margin: 10px 0 6px; opacity: .95; }
+  .mailbox input, .mailbox textarea { width: 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,.25); border-radius: 12px; background: rgba(255,255,255,.12); color: #fff; font: inherit; font-size: 16px; padding: 12px 14px; outline: none; transition: border-color .2s, background .2s; resize: vertical; }
+  .mailbox input::placeholder, .mailbox textarea::placeholder { color: rgba(255,255,255,.6); }
+  .mailbox input:focus, .mailbox textarea:focus { border-color: #fff; background: rgba(255,255,255,.18); }
+  .mail-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .mail-err { min-height: 18px; margin: 8px 0 0; font-size: 13px; color: #fde68a; }
+  .mail-send { margin-top: 6px; width: 100%; min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 12px; background: #fff; color: #1d4ed8; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer; transition: transform .2s; }
+  .mail-send:hover { transform: translateY(-1px); }
+  .mail-rgpd { margin: 12px 0 0; font-size: 11.5px; opacity: .75; text-align: center; }
+  .mail-x { position: absolute; z-index: 3; top: 10px; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 12px; background: rgba(255,255,255,.14); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; }
+  .mail-x:hover { background: rgba(255,255,255,.25); }
+  .mail-plane { position: fixed; z-index: 46; left: 0; top: 0; width: 56px; height: 56px; margin: -28px 0 0 -28px; pointer-events: none; will-change: transform, opacity; backface-visibility: hidden; }
+  @media (max-width: 640px) {
+    .cta-mail { width: 100%; min-height: 60px; }
+    /* sur téléphone : la boîte s'ouvre en bas, au-dessus du clavier */
+    .mailbox { top: auto; bottom: calc(10px + env(safe-area-inset-bottom)); width: calc(100vw - 20px); border-radius: 20px; max-height: calc(100dvh - 20px); }
+    .mail-inner { padding: 20px 16px 14px; }
+    .mailbox h3 { font-size: 21px; margin-bottom: 10px; padding-right: 44px; }
+    .mailbox textarea { min-height: 96px; }
+    .mail-plane { width: 46px; height: 46px; margin: -23px 0 0 -23px; }
+  }
+  @media (max-height: 560px) and (orientation: landscape) {
+    .mailbox textarea { min-height: 60px; }
+    .mailbox label { margin-top: 6px; }
+  }
+
   /* ====== Tablette ====== */
   @media (max-width: 900px) {
     .hero { padding: 48px 24px; gap: 40px; }
@@ -508,7 +565,7 @@
       <p class="lead">Je fais le pont entre les métiers, le produit et la tech. Je conçois des outils simples, automatisés et adoptés, de la discovery jusqu'au prototype.</p>
       <div class="btns">
         <a href="#projets" class="btn primary">Voir mes projets</a>
-        <a href="#contact" class="btn">Me contacter</a>
+        <button type="button" class="btn" data-open-mail style="cursor: pointer; font: inherit; font-weight: 500">Me contacter</button>
       </div>
     </div>
     <div class="term-wrap">
@@ -620,7 +677,7 @@
         <div class="final" id="final">4 quête(s) restante(s) avant le niveau max</div>
       </div>
       <div class="btns">
-        <a href="mailto:[TON EMAIL]" class="btn light">[TON EMAIL]</a>
+        <button type="button" class="cta-mail" data-open-mail><span class="cta-plane" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M2 11.5L22 3l-6.5 18-3.8-7.2z"/><path d="M22 3L11.7 13.8"/></svg></span><span class="cta-txt"><b>Écris-moi</b><small>Réponse sous 48 h</small></span><span class="cta-arrow" aria-hidden="true">→</span></button>
         <a href="https://www.linkedin.com/in/[TON-PROFIL]" class="btn" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/[TON-PSEUDO]" class="btn" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -635,6 +692,25 @@
   </div>
 </footer>
 
+<div class="mail-veil" id="mail-veil" hidden></div>
+<div class="mailbox" id="mailbox" hidden role="dialog" aria-modal="true" aria-labelledby="mail-title">
+  <button type="button" class="mail-x" id="mail-close" aria-label="Fermer">×</button>
+  <div class="mail-inner">
+    <div class="mail-kicker">nouveau message ✉</div>
+    <h3 id="mail-title">Envoie-moi un message</h3>
+    <form id="mail-form" novalidate>
+      <label for="mail-from">Ton adresse email</label>
+      <input id="mail-from" name="email" type="email" autocomplete="email" placeholder="prenom@exemple.com" required>
+      <label for="mail-msg">Ton message</label>
+      <textarea id="mail-msg" name="message" rows="4" placeholder="Bonjour Adam, …" required></textarea>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="mail-hp" aria-hidden="true">
+      <p class="mail-err" id="mail-err" role="alert"></p>
+      <button type="submit" class="mail-send"><span>Envoyer</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 11.5L22 3l-6.5 18-3.8-7.2z"/><path d="M22 3L11.7 13.8"/></svg></button>
+      <p class="mail-rgpd">Ton email sert uniquement à te répondre. Il n'est ni stocké sur ce site ni partagé.</p>
+    </form>
+  </div>
+</div>
+<div class="mail-plane" id="mail-plane" hidden><svg viewBox="0 0 24 24" width="100%" height="100%" aria-hidden="true"><path d="M2 11.5L22 3l-6.5 18-3.8-7.2z" fill="#ffffff" stroke="#2563eb" stroke-width="1.3" stroke-linejoin="round"/><path d="M22 3L11.7 13.8" stroke="#2563eb" stroke-width="1.1"/><path d="M11.7 13.8L10 19l2.6-3.6" fill="#2563eb" opacity=".35"/></svg></div>
 <div class="win" id="win" hidden role="dialog" aria-modal="true" aria-labelledby="win-title">
   <div class="win-card">
     <div class="win-trophy" aria-hidden="true">
@@ -995,6 +1071,160 @@
     deleting = false; w = (w + 1) % WORDS.length; setTimeout(tick, 350);
   }
   setTimeout(function () { deleting = true; tick(); }, 2200);
+})();
+</script>
+<script>
+/* ====== Boîte « Écris-moi » : la boîte devient un avion en papier ======
+   ENVOI : le message part via FormSubmit (service gratuit pour les sites statiques).
+   Remplace l'adresse ci-dessous par la tienne. Au tout premier envoi, FormSubmit
+   t'envoie un email d'activation à confirmer une seule fois. */
+(function () {
+  var CONTACT_EMAIL = '[TON EMAIL]';
+  var box = document.getElementById('mailbox'), veil = document.getElementById('mail-veil');
+  var plane = document.getElementById('mail-plane'), form = document.getElementById('mail-form');
+  var err = document.getElementById('mail-err');
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var origin = null, busy = false;
+
+  function say(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(say.t); say.t = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+  function center(el) { var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height }; }
+  var easeInOut = function (t) { return 0.5 - 0.5 * Math.cos(Math.PI * t); };
+  var easeIn = function (t) { return t * t * (1.6 - 0.6 * t); };
+  var big = function () { return window.innerWidth < 640 ? 1 : 1.15; };
+
+  /* un seul vol continu : l'avion se forme à la place de la boîte puis suit la trajectoire.
+     Les points sont calculés à l'avance, l'inclinaison suit toujours la direction du vol. */
+  function fly(c, path, opts) {
+    var pts = [], steps = opts.steps || 80, fn = opts.ease || easeInOut;
+    for (var i = 0; i <= steps; i++) pts.push(path(fn(i / steps), i / steps));
+    var ang = function (i) {
+      var p = pts[Math.max(0, i - 1)], q = pts[Math.min(pts.length - 1, i + 1)];
+      return Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI + 22;
+    };
+    var a0 = ang(0), formed = opts.form / (opts.form + opts.duration);
+    var tf = function (x, y, a, sc) { return 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' + a.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')'; };
+    var frames = [
+      { offset: 0, transform: tf(c.x, c.y, a0 - 70, 0.15), opacity: 0, easing: 'cubic-bezier(.2,.8,.3,1.25)' },
+      { offset: formed, transform: tf(c.x, c.y, a0, pts[0].s), opacity: 1 }
+    ];
+    for (var j = 1; j < pts.length; j++) {
+      var p = pts[j];
+      frames.push({ offset: formed + (1 - formed) * j / steps, transform: tf(p.x, p.y, ang(j), p.s), opacity: p.o == null ? 1 : p.o });
+    }
+    plane.hidden = false;
+    var anim = plane.animate(frames, { duration: opts.form + opts.duration, delay: opts.delay || 0, easing: 'linear', fill: 'both' });
+    anim.onfinish = function () { plane.hidden = true; anim.cancel(); opts.done(); };
+  }
+
+  /* ---- ouverture : la boîte jaillit du bouton (transform + opacité seulement) ---- */
+  function open(btn) {
+    if (busy) return;
+    origin = btn;
+    box.hidden = false; veil.hidden = false;
+    requestAnimationFrame(function () { veil.classList.add('show'); });
+    if (!calm) {
+      var bt = center(btn), c = center(box);
+      box.animate([
+        { transform: 'translate3d(' + (bt.x - c.x) + 'px,' + (bt.y - c.y) + 'px,0) scale(' + (bt.w / c.w).toFixed(3) + ',' + (bt.h / c.h).toFixed(3) + ')', opacity: 0.4 },
+        { transform: 'translate3d(0,0,0) scale(1)', opacity: 1 }
+      ], { duration: 560, easing: 'cubic-bezier(.16,1,.3,1)' });
+      box.querySelector('.mail-inner').animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 320, delay: 220, easing: 'ease-out', fill: 'backwards' });
+    }
+    err.textContent = '';
+    setTimeout(function () { document.getElementById('mail-from').focus({ preventScroll: true }); }, calm ? 0 : 460);
+  }
+
+  /* ---- la boîte se plie (puis l'avion prend le relais, sans coupure) ---- */
+  function fold() {
+    var c = center(box);
+    veil.classList.remove('show');
+    if (calm) { box.hidden = true; veil.hidden = true; return c; }
+    var inner = box.querySelector('.mail-inner');
+    inner.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-in', fill: 'forwards' });
+    var a = box.animate([
+      { transform: 'scale(1) rotate(0deg)', opacity: 1 },
+      { transform: 'scale(.62, .4) rotate(-6deg)', opacity: 1, offset: .5 },
+      { transform: 'scale(.1) rotate(-28deg)', opacity: 0 }
+    ], { duration: 520, easing: 'cubic-bezier(.55,0,.45,1)', fill: 'forwards' });
+    a.onfinish = function () {
+      box.hidden = true; veil.hidden = true;
+      a.cancel(); inner.getAnimations().forEach(function (x) { x.cancel(); });
+    };
+    return c;
+  }
+
+  /* ---- ENVOI : l'avion s'envole et disparaît ---- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var from = form.email.value.trim(), msg = form.message.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) { err.textContent = 'Ajoute une adresse email valide.'; form.email.focus(); return; }
+    if (msg.length < 2) { err.textContent = 'Écris un petit message.'; form.message.focus(); return; }
+    if (form._honey.value) return;                     // robot
+    busy = true;
+    var sending = send(from, msg);
+    var c = fold();
+    var finish = function () {
+      busy = false;
+      sending.then(function (ok) {
+        if (ok) { form.reset(); say('Message envoyé ✈  Je te réponds vite !'); }
+        else say('Oups, l\'envoi n\'a pas marché. Réessaie dans un instant.');
+      });
+    };
+    if (calm) return finish();
+    var W = window.innerWidth, s0 = big();
+    // l'avion prend de la vitesse et file vers le haut à droite
+    fly(c, function (t) {
+      return { x: c.x + (W - c.x + 90) * t, y: c.y - 50 * Math.sin(t * Math.PI) - (c.y + 120) * t * t, s: s0 - .45 * t, o: t > .9 ? (1 - t) / .1 : 1 };
+    }, { form: 380, duration: 1250, delay: 230, ease: easeIn, done: finish });
+  });
+
+  function send(from, msg) {
+    if (CONTACT_EMAIL.indexOf('@') < 0) { console.warn('Configure CONTACT_EMAIL pour recevoir les messages.'); return Promise.resolve(true); }
+    return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONTACT_EMAIL), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email: from, message: msg, _subject: 'Nouveau message depuis ton site CV', _template: 'table', _captcha: 'false' })
+    }).then(function (r) { return r.ok; }).catch(function () { return false; });
+  }
+
+  /* ---- FERMETURE : l'avion fait une boucle puis redevient le bouton bleu ---- */
+  function close() {
+    if (busy || box.hidden) return;
+    busy = true;
+    var c = fold();
+    var target = origin && origin.getBoundingClientRect().width ? origin : document.querySelector('[data-open-mail]');
+    var land = function () {
+      busy = false;
+      if (target.classList.contains('cta-mail')) { target.classList.remove('popback'); void target.offsetWidth; target.classList.add('popback'); }
+      else target.animate([{ transform: 'scale(.6)', opacity: .3 }, { transform: 'scale(1.06)', opacity: 1 }, { transform: 'scale(1)' }], { duration: 520, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
+      target.focus({ preventScroll: true });
+    };
+    if (calm) return land();
+    var t0 = center(target), H = window.innerHeight, W = window.innerWidth;
+    var tx = (t0.y > 0 && t0.y < H) ? t0.x : W / 2, ty = (t0.y > 0 && t0.y < H) ? t0.y : H - 50;
+    var R = Math.max(40, Math.min(95, W / 5, (c.y - 20) / 2)), s0 = big();
+    // contrôle de la courbe de retour : prolonge la sortie de boucle (vers la droite) pour un virage sans à-coup
+    var kx = Math.min(W - 20, c.x + R * 1.6), ky = c.y;
+    fly(c, function (t) {
+      if (t < .5) {                                              // looping complet qui revient au point de départ
+        var u = t / .5, a = u * Math.PI * 2;
+        return { x: c.x + R * Math.sin(a), y: c.y - R + R * Math.cos(a), s: s0 };
+      }
+      var v = (t - .5) / .5, w = 1 - v;                          // courbe de Bézier jusqu'au bouton
+      return { x: w * w * c.x + 2 * w * v * kx + v * v * tx, y: w * w * c.y + 2 * w * v * ky + v * v * ty, s: s0 - .55 * v, o: v > .92 ? (1 - v) / .08 : 1 };
+    }, { form: 380, duration: 1700, delay: 230, ease: easeInOut, steps: 110, done: land });
+  }
+
+  document.querySelectorAll('[data-open-mail]').forEach(function (b) { b.addEventListener('click', function () { open(b); }); });
+  document.getElementById('mail-close').addEventListener('click', close);
+  veil.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
 })();
 </script>
 <script>
