@@ -220,6 +220,11 @@
   .xp.now .xp-date { background: #dbeafe; color: #1e40af; }
   .xp-body { flex: none; }
   .xp-body p { margin-top: 4px; }
+  .xp-missions { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .xp-missions li { position: relative; padding-left: 18px; color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .xp-missions li::before { content: ''; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); opacity: .55; transform: rotate(45deg); }
+  .xp.now .xp-missions li::before { opacity: .9; }
+
 
   /* Projets */
   .project { padding: 24px; }
@@ -483,6 +488,7 @@
     .xp::before { left: -24px; top: 21px; }
     .xp-date { font-size: 12px; }
     .xp-title { font-size: 16px; }
+    .xp-missions li { font-size: 14px; }
     .projects { gap: 14px; margin-top: 20px; }
     .project { padding: 20px; }
     .project h3 { font-size: 20px; }
@@ -613,11 +619,11 @@
     <h2>Expériences</h2>
     <button class="quest-btn" data-quest="parcours" data-n="1" data-title="Tu as parcouru mes expériences ?" data-badge-name="Historien" type="button"></button>
     <div class="xp-list">
-      <div class="xp now reveal"><div class="xp-date">2026 → 2028</div><div class="xp-body"><div class="xp-title">Product Manager — Application mobile · KIABI <span class="now-tag">en cours</span></div><p>Rôle 360 entre produit, UX/UI et marketing. Je prototype moi-même et je crée des outils qui facilitent le travail des PM et des métiers autour.</p></div></div>
-      <div class="xp reveal"><div class="xp-date">→ sept. 2026</div><div class="xp-body"><div class="xp-title">Chef de projet RH — Transformation &amp; Digitalisation · ADEO Services</div><p>Automatisation des processus RH (Google Apps Script), refonte de l'onboarding, conformité RGPD et transfert de propriété des automatisations.</p></div></div>
-      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Recrutement tech · Comet</div><p>[Une ligne sur tes missions et un résultat clé]</p></div></div>
-      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Admissions · In Motion Education</div><p>[Une ligne sur tes missions et un résultat clé]</p></div></div>
-      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Marketing &amp; communication · ARJO</div><p>[Une ligne sur tes missions et un résultat clé]</p></div></div>
+      <div class="xp now reveal"><div class="xp-date">2026 → 2028</div><div class="xp-body"><div class="xp-title">Product Manager — Application mobile · KIABI <span class="now-tag">en cours</span></div><p>Alternance de 2 ans dans l'équipe produit de l'app mobile, sur un rôle 360 entre produit, UX/UI, tech et marketing.</p><ul class="xp-missions"><li>Faire évoluer l'application mobile avec les designers, les développeurs et le marketing</li><li>Prototyper moi-même les idées pour les tester et les faire valider rapidement</li><li>Créer des outils internes pour les PM : veille tech et benchmark de marques par pays (« Kaisse à outils »), cadrage façon double diamant</li><li>Animer une veille hebdomadaire tech, IA et concurrence pour les équipes</li></ul></div></div>
+      <div class="xp reveal"><div class="xp-date">→ sept. 2026</div><div class="xp-body"><div class="xp-title">Chef de projet RH — Transformation &amp; Digitalisation · ADEO Services</div><p>Alternance au sein des RH : digitaliser et automatiser les processus pour faire gagner du temps aux équipes.</p><ul class="xp-missions"><li>Automatisation de bout en bout en Google Apps Script : avenants CDI, congés maternité et paternité, mobilité douce, mécénat, changements d'horaire</li><li>66 h 57 gagnées sur la contractualisation, avec les étapes de validation humaine conservées</li><li>Refonte de l'onboarding et réflexion SIRH</li><li>Organisation du Drive RH : nommage, classement, archivage et gestion des accès conforme RGPD</li><li>Documentation et FAQ pour les équipes RH, puis passation des automatisations avant mon départ</li></ul></div></div>
+      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Chargé de recrutement tech · Comet</div><p>Recrutement de profils tech, du sourcing à la proposition.</p><ul class="xp-missions"><li>Sourcing et approche de candidats tech</li><li>Qualification des profils et entretiens de préselection</li><li>Suivi des process avec les managers et les candidats</li></ul></div></div>
+      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Chargé d'admissions · In Motion Education</div><p>Accompagnement des futurs étudiants, du premier contact à l'inscription.</p><ul class="xp-missions"><li>Entretiens d'admission et conseil sur les formations</li><li>Suivi des dossiers de candidature et relances</li><li>Participation aux événements de recrutement (salons, journées portes ouvertes)</li></ul></div></div>
+      <div class="xp reveal"><div class="xp-date">[ANNÉES]</div><div class="xp-body"><div class="xp-title">Chargé de marketing &amp; communication · ARJO</div><p>Communication interne et externe, print et digital.</p><ul class="xp-missions"><li>Création de contenus et de supports de communication</li><li>Animation des canaux digitaux</li><li>Appui aux actions marketing et aux événements</li></ul></div></div>
     </div>
   </section>
 
@@ -631,7 +637,7 @@
       <article class="project reveal"><div class="project-top"><div class="tagline">KIABI · IA</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/></svg></span></div><h3>Agent veille &amp; opportunités</h3><p>Veille, avis stores, benchmark concurrents et radar d'opportunités pour les équipes produit.</p><div class="tags"><span>agent IA</span><span>benchmark</span></div></article>
       <article class="project reveal"><div class="project-top"><div class="tagline">KIABI · newsletter</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><h3>La veille Hebdo</h3><p>Newsletter hebdomadaire de veille tech, IA et concurrence pour les équipes KIABI.</p><div class="tags"><span>veille</span><span>contenu</span></div></article>
       <article class="project reveal"><div class="project-top"><div class="tagline">ADEO · automatisation</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M6.5 10v4a3 3 0 003 3H14"/></svg></span></div><h3>Automatisation contractuelle</h3><p>Workflows Google Apps Script pour 3 types de contrats, avec validation humaine conservée et conformité RGPD.</p><div class="tags"><span>Apps Script</span><span>RGPD</span></div></article>
-      <article class="project reveal"><div class="project-top"><div class="tagline">Side project · web app</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span></div><h3>the_rebornlife</h3><p>Application web de suivi sportif que je conçois et développe.</p><div class="tags"><span>web app</span><span>produit</span></div></article>
+      <article class="project reveal"><div class="project-top"><div class="tagline">Side project · logiciel</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span></div><h3>Bambino</h3><p>Logiciel de gestion de micro-crèche que je conçois et développe avec Claude Code.</p><div class="tags"><span>logiciel</span><span>IA</span></div></article>
       <article class="project reveal"><div class="project-top"><div class="tagline">Entrepreneuriat</div><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 4.5a3 3 0 010 7M21 20c0-2.6-1.5-4.7-3.7-5.6"/></svg></span></div><h3>HumanTechRH</h3><p>Conseil et modèles pour digitaliser les RH des PME.</p><div class="tags"><span>SIRH</span><span>PME</span></div></article>
     </div>
   </section>
@@ -678,7 +684,7 @@
       </div>
       <div class="btns">
         <button type="button" class="cta-mail" data-open-mail><span class="cta-plane" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M2 11.5L22 3l-6.5 18-3.8-7.2z"/><path d="M22 3L11.7 13.8"/></svg></span><span class="cta-txt"><b>Écris-moi</b><small>Réponse sous 48 h</small></span><span class="cta-arrow" aria-hidden="true">→</span></button>
-        <a href="https://www.linkedin.com/in/[TON-PROFIL]" class="btn" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/adam-mortreu/" class="btn" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/[TON-PSEUDO]" class="btn" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
@@ -1113,7 +1119,9 @@
     ];
     for (var j = 1; j < pts.length; j++) {
       var p = pts[j];
-      frames.push({ offset: formed + (1 - formed) * j / steps, transform: tf(p.x, p.y, ang(j), p.s), opacity: p.o == null ? 1 : p.o });
+      var aj = ang(j);
+      if (p.blend) { var d = ((p.rot - aj + 540) % 360) - 180; aj += d * p.blend; }   // se recale sur l'orientation finale
+      frames.push({ offset: formed + (1 - formed) * j / steps, transform: tf(p.x, p.y, aj, p.s), opacity: p.o == null ? 1 : p.o });
     }
     plane.hidden = false;
     var anim = plane.animate(frames, { duration: opts.form + opts.duration, delay: opts.delay || 0, easing: 'linear', fill: 'both' });
@@ -1199,25 +1207,33 @@
     busy = true;
     var c = fold();
     var target = origin && origin.getBoundingClientRect().width ? origin : document.querySelector('[data-open-mail]');
+    var icon = target.querySelector('.cta-plane svg');            // le pictogramme avion du bouton
     var land = function () {
       busy = false;
-      if (target.classList.contains('cta-mail')) { target.classList.remove('popback'); void target.offsetWidth; target.classList.add('popback'); }
+      if (icon) icon.parentNode.animate([{ transform: 'scale(.86)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
       else target.animate([{ transform: 'scale(.6)', opacity: .3 }, { transform: 'scale(1.06)', opacity: 1 }, { transform: 'scale(1)' }], { duration: 520, easing: 'cubic-bezier(.2,.9,.3,1.3)' });
       target.focus({ preventScroll: true });
     };
     if (calm) return land();
-    var t0 = center(target), H = window.innerHeight, W = window.innerWidth;
-    var tx = (t0.y > 0 && t0.y < H) ? t0.x : W / 2, ty = (t0.y > 0 && t0.y < H) ? t0.y : H - 50;
+    var H = window.innerHeight, W = window.innerWidth;
+    var dest = center(icon || target);
+    var tx = (dest.y > 0 && dest.y < H) ? dest.x : W / 2, ty = (dest.y > 0 && dest.y < H) ? dest.y : H - 50;
+    var planeSize = W < 640 ? 46 : 56;
+    var endScale = icon ? dest.w / planeSize : 0.5;                 // même taille que le pictogramme
     var R = Math.max(40, Math.min(95, W / 5, (c.y - 20) / 2)), s0 = big();
-    // contrôle de la courbe de retour : prolonge la sortie de boucle (vers la droite) pour un virage sans à-coup
     var kx = Math.min(W - 20, c.x + R * 1.6), ky = c.y;
+    var smooth = function (x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
     fly(c, function (t) {
-      if (t < .5) {                                              // looping complet qui revient au point de départ
+      if (t < .5) {                                              // looping complet
         var u = t / .5, a = u * Math.PI * 2;
         return { x: c.x + R * Math.sin(a), y: c.y - R + R * Math.cos(a), s: s0 };
       }
-      var v = (t - .5) / .5, w = 1 - v;                          // courbe de Bézier jusqu'au bouton
-      return { x: w * w * c.x + 2 * w * v * kx + v * v * tx, y: w * w * c.y + 2 * w * v * ky + v * v * ty, s: s0 - .55 * v, o: v > .92 ? (1 - v) / .08 : 1 };
+      var v = (t - .5) / .5;
+      var q = icon ? Math.min(1, v / .92) : v, w = 1 - q;     // arrive pile sur le pictogramme, puis s'y fond
+      var k = smooth((q - .5) / .5);
+      return { x: w * w * c.x + 2 * w * q * kx + q * q * tx, y: w * w * c.y + 2 * w * q * ky + q * q * ty,
+               s: s0 + (endScale - s0) * smooth(q), rot: 0, blend: icon ? k : 0,
+               o: icon ? (v > .94 ? (1 - v) / .06 : 1) : (v > .92 ? (1 - v) / .08 : 1) };
     }, { form: 380, duration: 1700, delay: 230, ease: easeInOut, steps: 110, done: land });
   }
 
